@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/grupo/grupo-tabs/planes/tabs/agregar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seleccionar ubicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div id="map" style="height: 400px;"></div>
+  <ion-button expand="block" (click)="confirmarUbicacion()" color="primary">
+    Confirmar ubicación
+  </ion-button>
+</ion-content>

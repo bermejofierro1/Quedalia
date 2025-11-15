@@ -1,0 +1,278 @@
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;     /* ancho de la ventana */
+  height: 100vh;    /* alto de la ventana */
+  object-fit: cover;
+  object-position: center 65%;  /* posición vertical que quieres */
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); // oscurece ligeramente para mejor visibilidad
+  z-index: -1;
+}
+
+.login-container {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ion-input, ion-button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.app-name {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+ion-input {
+  --background: #085062;
+  --color: #d2a429;
+  --border-radius: 8px;
+  --border-style: solid;
+  --border-width: 2px;
+  --border-color: #f2a429;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem; /* Más espacio entre inputs */
+
+  input::placeholder {
+    color: #bfa84a;
+    opacity: 1;
+  }
+}
+
+ion-input input {
+  color: #d2a429 !important;
+  text-align: center;
+}
+
+ion-input input::placeholder {
+  color: #bfa84a;
+  opacity: 1;
+  text-align: center;
+}
+
+
+ion-button {
+  --background: #085062;
+  --color: #f2a429;
+  --border-radius: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+}
+
+/* Aplicamos la sombra al botón interno nativo */
+ion-button::part(native) {
+  box-shadow: 0 4px 12px rgba(242, 164, 41, 0.5);
+  border-radius: 8px;
+}
+
+
+/* Botón clear registro */
+ion-button[fill="clear"] {
+  color: #f2a429;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  align-self: center;
+}
+
+/* Contenedor login centrado con margen y padding responsivos */
+.login-container {
+  z-index: 1;
+  position: relative;
+  width: 90%;
+  max-width: 360px;
+  margin: 3rem auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 400px) {
+  ion-input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  ion-button {
+    font-size: 1rem;
+    padding: 0.85rem 0;
+  }
+  .logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.4rem;
+  }
+  .app-name {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-container {
+  animation: fadeSlideIn 0.9s ease-out forwards;
+}
+
+/*Enlace para el registro*/
+.registro-footer {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  z-index: 3;
+}
+
+.registro-link {
+  display: inline-block;
+  background: rgba(80, 80, 80, 0.4); 
+  color: #f2a429;                    
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 25px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+
+
+/*Sugerencias para el correo */
+/* Contenedor */
+.email-container {
+  position: relative;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* Animación de fade + slide down */
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lista desplegable */
+.lista-sugerencias {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #083445;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 0.3rem 0;
+  margin-top: 6px;
+  border: 2px solid #f2a429;
+  font-size: 1rem;
+  color: #f2a429;
+  font-weight: 600;
+
+  animation: fadeSlideDown 0.3s ease forwards;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Items con efecto hover y tap */
+.lista-sugerencias ion-item {
+  --padding-start: 1rem;
+  --inner-padding-end: 1rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.1s ease;
+  color: #f2a429 !important;
+  border-radius: 10px;
+  user-select: none;
+  height: 44px;
+  line-height: 44px;
+}
+
+/* Hover / focus / active */
+.lista-sugerencias ion-item:hover,
+.lista-sugerencias ion-item:focus {
+  background-color: #f2a429;
+  color: #083445 !important;
+}
+
+/* Pequeño "zoom" en tap para feedback táctil */
+.lista-sugerencias ion-item:active {
+  transform: scale(0.96);
+  background-color: #f2a429;
+  color: #083445 !important;
+}
+
+/* Scrollbar para WebKit */
+.lista-sugerencias::-webkit-scrollbar {
+  width: 6px;
+}
+.lista-sugerencias::-webkit-scrollbar-thumb {
+  background: #d2a429;
+  border-radius: 3px;
+}
+.lista-sugerencias::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Responsive pequeño */
+@media (max-width: 360px) {
+  .lista-sugerencias {
+    font-size: 0.9rem;
+    max-height: 140px;
+  }
+  .lista-sugerencias ion-item {
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+

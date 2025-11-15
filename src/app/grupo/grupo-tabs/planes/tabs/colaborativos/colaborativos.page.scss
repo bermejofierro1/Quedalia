@@ -1,0 +1,146 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/* === HEADER === */
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 5px rgba(210, 164, 41, 0.6);
+}
+
+/* === CONTENT === */
+ion-content {
+  --background: #063f4e;
+  color: var(--ion-text-color);
+  padding: 1rem;
+}
+
+/* === LISTA DE PLANES === */
+.plan-item {
+  --background: transparent;
+  background-size: cover;
+  background-position: center;
+  border-radius: 14px;
+  margin: 12px 0;
+  min-height: 140px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  box-shadow: 0 3px 10px rgba(210, 164, 41, 0.15);
+}
+
+.plan-item:hover {
+  transform: scale(1.02);
+}
+
+/* Oscurecer imagen */
+.plan-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+/* Texto por encima */
+.plan-label {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.plan-label h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-text-color);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.plan-label p {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #f1f1f1;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Spinner */
+ion-spinner {
+  display: block;
+  margin: 3rem auto;
+  color: var(--ion-text-color);
+}
+
+/* Texto vacío */
+p {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: var(--ion-text-color);
+  opacity: 0.8;
+}
+
+/* === DARK MODE === */
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #042b33;
+  }
+
+  .plan-item {
+    box-shadow: 0 4px 12px rgba(210, 164, 41, 0.25);
+  }
+
+  .plan-label h2,
+  .plan-label p,
+  p {
+    color: var(--ion-text-color);
+  }
+}
+
+//==========EFECTO RECARGA========
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

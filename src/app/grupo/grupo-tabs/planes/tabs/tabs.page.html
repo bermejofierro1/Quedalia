@@ -1,0 +1,19 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="publicos" [routerLink]="['publicos']">
+      <ion-icon name="globe-outline"></ion-icon>
+      <ion-label>Públicos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="colaborativos" [routerLink]="['colaborativos']">
+      <ion-icon name="people-outline"></ion-icon>
+      <ion-label>Colaborativos</ion-label>
+    </ion-tab-button>
+
+     <ion-tab-button tab="agregar" [routerLink]="['agregar']">
+      <ion-icon name="add-outline"></ion-icon>
+      <ion-label>Agregar</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+  <router-outlet></router-outlet>
+</ion-tabs>

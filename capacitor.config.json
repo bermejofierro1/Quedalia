@@ -1,0 +1,6 @@
+{
+  "appId": "com.miguel.quedadas",
+  "appName": "app-quedadas",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

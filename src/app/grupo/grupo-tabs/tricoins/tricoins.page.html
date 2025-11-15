@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tricoins</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div #contentRef class="blur-container">
+     <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+
+  <h2 class="titulo-principal">{{ tricoinsData?.nombre }}</h2>
+
+  <!-- Lista de Miembros -->
+  <section>
+    <ion-list>
+      <ion-list-header>Miembros</ion-list-header>
+      <ion-item *ngFor="let miembro of miembros">
+        {{ miembro.nombre }}
+      </ion-item>
+    </ion-list>
+  </section>
+
+<!-- Lista de Pagos -->
+
+<section>
+  <ion-list>
+      <ion-list-header>Pagos</ion-list-header>
+    
+    </ion-list>
+  <ion-card *ngFor="let pago of pagos" class="pago-card">
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{ getNombresInvolucrados(pago.involucrados) }}
+      </ion-card-subtitle>
+      <ion-card-title>
+        {{ nombreDeUsuario(pago.pagadoPor) }} pagó {{ pago.cantidad | currency:'EUR' }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-icon name="wallet-outline" class="icono-pago"></ion-icon>
+      <p class="descripcion">{{ pago.descripcion }}</p>
+    </ion-card-content>
+  </ion-card>
+</section>
+
+  <!-- Lista de Deudas -->
+ <section>
+  <ion-list>
+    <ion-list-header>Deudas</ion-list-header>
+    <ion-item class="deuda-item" *ngFor="let deuda of deudas">
+      <ion-icon name="arrow-forward-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h3>{{ nombreDeUsuario(deuda.deudor) }}</h3>
+        <p>Debe {{ deuda.cantidad | currency:'EUR' }} a {{ nombreDeUsuario(deuda.acreedor) }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</section>
+
+ <!-- Resumen por usuario -->
+<ion-card class="resumen-card">
+  <ion-card-header>
+    <ion-card-title>Resumen por usuario</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="6" *ngFor="let user of resumenUsuarios">
+          <ion-card class="usuario-card">
+            <ion-card-content>
+              <h3>{{ user.nombre }}</h3>
+              <p>Pagado: {{ user.pagado | currency:'EUR' }}</p>
+              <p>Debe: {{ user.debe | currency:'EUR' }}</p>
+              <p><strong>Balance: {{ (user.pagado - user.debe) | currency:'EUR' }}</strong></p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+  </div>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" (click)="irAnhadirGasto()">
+        <ion-icon name="cash-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary" (click)="abrirAlertaAnadirMiembro()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>

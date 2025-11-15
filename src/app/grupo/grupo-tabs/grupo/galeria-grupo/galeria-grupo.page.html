@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/grupos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Galería del Grupo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirModalCrearAlbum()">
+        <ion-icon name="add" slot="end"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding galeria-page">
+  <div #contentRef class="blur-container">
+    <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+    <!-- Botón mostrar/ocultar filtros (arriba del todo, sin fondo) -->
+    <div class="toggle-filtros-container">
+      <ion-button fill="clear" class="toggle-filtros-btn" (click)="mostrarFiltros = !mostrarFiltros">
+        <ion-icon slot="start" name="options-outline"></ion-icon>
+        {{ mostrarFiltros ? 'Ocultar filtros' : 'Mostrar filtros' }}
+      </ion-button>
+    </div>
+
+    <!-- Card de filtros -->
+    <ion-card class="filtros-card" [class.oculto]="!mostrarFiltros">
+      <ion-card-content>
+        <div class="filtros-wrapper">
+
+          <!-- Fecha: botón para abrir datetime -->
+          <div class="filtro-item">
+            <label class="filtro-label" (click)="mostrarFecha = !mostrarFecha">
+              <ion-icon name="calendar-outline"></ion-icon>
+              Fecha
+              <ion-icon [name]="mostrarFecha ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+            </label>
+
+            <ion-datetime *ngIf="mostrarFecha" presentation="date" [(ngModel)]="filtros.fecha"
+              (ionChange)="aplicarFiltros()" placeholder="Selecciona fecha" cancelText="Cerrar" doneText="Seleccionar"
+              class="filtro-datetime">
+            </ion-datetime>
+
+            <ion-button *ngIf="filtros.fecha" fill="clear" size="small" color="danger"
+              aria-label="Eliminar filtro de fecha" (click)="filtros.fecha=''; aplicarFiltros();">
+              <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+          </div>
+
+          <!-- Select Usuario -->
+          <ion-item lines="none" class="filtro-item">
+            <ion-label position="floating" class="filtro-label">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              Subido por
+            </ion-label>
+            <ion-select class="filtro-select" [(ngModel)]="filtros.usuario" (ionChange)="aplicarFiltros()"
+              placeholder="Selecciona usuario" interface="popover" cancelText="Cerrar" okText="Seleccionar">
+              <ion-select-option *ngFor="let u of usuariosUnicos" [value]="u">{{ u }}</ion-select-option>
+            </ion-select>
+            <ion-button *ngIf="filtros.usuario" fill="clear" size="small" color="danger"
+              aria-label="Eliminar filtro de usuario" (click)="filtros.usuario=''; aplicarFiltros();">
+              <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <!-- Botón Limpiar todo -->
+          <ion-button size="small" fill="outline" color="medium" class="limpiar-todo-btn" (click)="limpiarFiltros()"
+            [disabled]="!filtros.fecha && !filtros.usuario">
+            Limpiar filtros
+            <ion-icon slot="end" name="close-circle"></ion-icon>
+          </ion-button>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de álbumes -->
+    <div class="albums-container" *ngIf="albums.length">
+
+      <h2 class="albums-title">Álbumes</h2>
+
+      <div class="albums-grid">
+        <ion-card *ngFor="let album of albums" (click)="verAlbum(album.id)" class="album-card"
+          (mousedown)="iniciarPulsacionLarga($event, album)" (touchstart)="iniciarPulsacionLarga($event, album)"
+          (mouseup)="cancelarPulsacionLarga()" (mouseleave)="cancelarPulsacionLarga()"
+          (touchend)="cancelarPulsacionLarga()" button>
+
+          <div class="album-thumbnail-wrapper">
+            <img *ngIf="album.ultimaFotoUrl; else noThumb" [src]="album.ultimaFotoUrl" alt="Previsualización álbum"
+              class="album-thumbnail" />
+            <ng-template #noThumb>
+              <ion-icon name="albums-outline" class="album-icon"></ion-icon>
+            </ng-template>
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ album.nombre }}</ion-card-title>
+            <ion-card-subtitle>Creado: {{ album.creadoEn?.toDate() | date:'short' }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p class="album-fotos-count">{{ album.totalFotos }} foto{{ album.totalFotos !== 1 ? 's' : '' }}</p>
+          </ion-card-content>
+
+        </ion-card>
+      </div>
+
+    </div>
+
+    <!-- Galería de fotos -->
+    <h2 class="albums-title">Fotos</h2>
+    <ion-grid class="galeria-grid">
+      <ion-row>
+        <ion-col size="6" size-sm="4" size-md="3" *ngFor="let foto of fotos" class="foto-col">
+          <ion-card button (click)="ampliarImagen(foto)" class="foto-card">
+            <img [src]="foto.url" alt="Foto de galería" class="foto-galeria" />
+            <ion-card-content class="foto-info">
+              <ion-text color="medium" class="fecha-subida">
+                {{ foto.fechaSubida?.toDate ? (foto.fechaSubida.toDate() | date:'short') : (foto.fechaSubida |
+                date:'short') }}
+              </ion-text>
+              <ion-text color="medium" class="usuario-subida" title="{{ foto.nombreUsuario || 'Desconocido' }}">
+                📷 {{ foto.nombreUsuario || 'Desconocido' }}
+              </ion-text>
+            </ion-card-content>
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- Botón flotante añadir imagen -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button aria-label="Añadir Foto" (click)="seleccionarImagen()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Input oculto para subir imágenes -->
+  <input type="file" accept="image/*" multiple #fileInput hidden (change)="subirFotos($event)" />
+
+</ion-content>
+
+<!-- Overlay para la carga-->
+<div *ngIf="isLoading" class="loading-overlay">
+  <ion-spinner name="crescent" color="light"></ion-spinner>
+  <p class="loading-text">Cargando...</p>
+</div>

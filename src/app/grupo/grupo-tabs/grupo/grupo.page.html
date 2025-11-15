@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/grupos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ grupoData?.nombre || 'Grupo' }}</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+
+
+
+<ion-content *ngIf="grupoData; else noData" class="ion-padding grupo-page" >
+  <div #contentRef class="blur-container">
+  <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+
+  <!-- Imagen portada -->
+  <div class="grupo-portada">
+    <img [src]="grupoData.foto || 'assets/img/default-group.jpg'" />
+    <div class="portada-overlay">
+      <h1>{{ grupoData.nombre }}</h1>
+    </div>
+  </div>
+
+  <!-- Tarjeta principal -->
+  <div class="grupo-card">
+    <div class="grupo-info-header">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Información del grupo</span>
+    </div>
+
+    <div class="grupo-info">
+      <div class="info-line">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <div>
+          <label>Creador</label>
+          <p>{{ creadorNombre }}</p>
+        </div>
+      </div>
+
+      <div class="info-line">
+        <ion-icon name="key-outline"></ion-icon>
+        <div>
+          <label>Código de acceso</label>
+          <p class="codigo">{{ grupoData.shareCode }}</p>
+        </div>
+        <ion-icon class="copy-icon" name="share-outline" (click)="compartirCodigo()"></ion-icon>
+      </div>
+
+      <div class="info-line">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <div>
+          <label>Estado de votación</label>
+          <p [class.abierta]="votacionEstado === 'abierta'" [class.cerrada]="votacionEstado !== 'abierta'">
+            {{ votacionEstado }}
+          </p>
+        </div>
+      </div>
+
+      <div class="info-line" *ngIf="fechaFinalElegida">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        <div>
+          <label>Fecha final elegida</label>
+          <p>{{ fechaFinalElegida }}</p>
+        </div>
+      </div>
+
+      <ion-button expand="block" fill="outline" color="medium" (click)="seleccionarImagen()">
+        Cambiar imagen de grupo
+      </ion-button>
+      <input type="file" accept="image/*" hidden #fileInput (change)="subirFotoGrupo($event)" />
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="grupo-actions fila">
+    <ion-button class="boton-gradiente" (click)="irAVotaciones()">
+      <ion-icon name="calendar-clear-outline" slot="start"></ion-icon>
+      Votaciones
+    </ion-button>
+    <ion-button class="boton-gradiente azul" (click)="irAGaleria()">
+      <ion-icon name="images-outline" slot="start"></ion-icon>
+      Galería
+    </ion-button>
+  </div>
+
+  <!-- Miembros -->
+  <div class="grupo-miembros">
+    <div class="miembros-header" (click)="toggleMostrarMiembros()">
+      <ion-icon name="people-outline"></ion-icon>
+      <span>Miembros ({{ miembrosCount }})</span>
+      <ion-icon [name]="mostrarMiembros ? 'chevron-up' : 'chevron-down'"></ion-icon>
+    </div>
+
+    <div class="miembros-grid" *ngIf="mostrarMiembros">
+      <div class="miembro-card" *ngFor="let miembro of miembrosLista">
+        <img *ngIf="miembro.foto" [src]="miembro.foto" />
+        <p>{{ miembro.nombre }}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</ion-content>
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>
+
+<ng-template #noData>
+  <ion-text color="medium">
+    <p class="ion-padding">No hay datos del grupo disponibles.</p>
+  </ion-text>
+</ng-template>

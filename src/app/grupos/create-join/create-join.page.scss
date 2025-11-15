@@ -1,0 +1,115 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/*Header*/
+ion-header {
+  background-color: var(--ion-background-color);
+  box-shadow: 0 2px 8px rgba(210, 164, 41, 0.4);
+  border-bottom: 2px solid var(--ion-text-color);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: 0 0 6px rgba(210, 164, 41, 0.8);
+}
+
+ion-header ion-button {
+  --background: transparent;
+  --color: var(--ion-text-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.65rem;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--ion-text-color);
+  box-shadow: 0 2px 5px rgba(210, 164, 41, 0.3);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+ion-header ion-button:hover {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+}
+
+
+
+/*Contenido*/
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1rem;
+}
+
+/* Estilo para los inputs */
+ion-input,
+ion-textarea {
+  --color: var(--ion-text-color);
+  --background: #0b768c;
+  --border-radius: 12px;
+  --highlight-color-focused: var(--ion-text-color);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  color: var(--ion-text-color);
+  margin-bottom: 16px;
+}
+
+/* Labels flotantes */
+ion-input::part(native),
+ion-textarea::part(native) {
+  color: var(--ion-text-color);
+  font-weight: 500;
+}
+
+ion-input::part(label),
+ion-textarea::part(label) {
+  color: var(--ion-text-color);
+  font-weight: 600;
+}
+
+/* Botones */
+ion-button {
+  --background: var(--ion-text-color);
+  --color: var(--ion-background-color);
+  font-weight: bold;
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 4px 8px rgba(210, 164, 41, 0.4);
+}
+
+ion-button:hover {
+  filter: brightness(1.05);
+}
+
+/* Imagen de previsualización */
+.preview-img {
+  margin: 16px auto;
+  display: block;
+  max-width: 200px;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(210, 164, 41, 0.4);
+  border: 2px solid var(--ion-text-color);
+}
+
+/* Texto de error */
+ion-text[color="danger"] {
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 600;
+}

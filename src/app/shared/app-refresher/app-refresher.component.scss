@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  position: relative; 
+}
+
+/* Ion-refresher por defecto */
+ion-refresher {
+  --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-tertiary));
+  --min-height: 70px;
+  backdrop-filter: blur(4px); /* ligero desenfoque */
+  z-index: 10; /* por encima del contenido */
+}
+
+/* Refresher-content */
+ion-refresher-content {
+  --color: white;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Overlay semitransparente centrado encima de todo */
+.loading-overlay {
+  position: fixed; /*cubro toda la pantalla */
+  inset: 0;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /*sobrepongo*/
+}
+
+/* Contenedor del spinner */
+.spinner-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+

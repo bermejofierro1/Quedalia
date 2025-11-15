@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Plan Colaborativo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="crearPlan()" novalidate>
+
+    <ion-input
+      label="Título"
+      labelPlacement="floating"
+      formControlName="titulo"
+      type="text"
+      required
+    ></ion-input>
+    <ion-text color="danger" *ngIf="form.get('titulo')?.invalid && form.get('titulo')?.touched">
+      El título es obligatorio.
+    </ion-text>
+
+    <ion-textarea
+      label="Descripción"
+      labelPlacement="floating"
+      formControlName="descripcion"
+      required
+    ></ion-textarea>
+    <ion-text color="danger" *ngIf="form.get('descripcion')?.invalid && form.get('descripcion')?.touched">
+      La descripción es obligatoria.
+    </ion-text>
+   
+ <ion-item>
+  <ion-label>Ciudad</ion-label>
+  <ion-select
+    formControlName="ciudad"
+    interface="popover"
+    placeholder="Selecciona ciudad"
+    (ionChange)="onCiudadChange($event)"
+  >
+    <ion-select-option value="Madrid">Madrid</ion-select-option>
+    <ion-select-option value="Barcelona">Barcelona</ion-select-option>
+    <ion-select-option value="Valencia">Valencia</ion-select-option>
+    <ion-select-option value="Sevilla">Sevilla</ion-select-option>
+    <ion-select-option value="Otra">Otra</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<ion-input
+  *ngIf="mostrarInputCiudadPersonalizada"
+  label="Introduce tu ciudad"
+  labelPlacement="floating"
+  formControlName="ciudadPersonalizada"
+  type="text"
+></ion-input>
+
+<ion-text color="danger" *ngIf="form.get('ciudadPersonalizada')?.invalid && form.get('ciudadPersonalizada')?.touched">
+  Este campo es obligatorio si seleccionas "Otra".
+</ion-text>
+
+
+<!-- VISUALIZADOR DE FECHAS PROPUESTAS DEL GRUPO -->
+<ion-item lines="none">
+  <ion-label position="stacked">Fechas propuestas por el grupo</ion-label>
+  <ion-list class="fechas-lista">
+    <ion-item *ngFor="let fecha of fechasDelGrupo">
+      <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+      <ion-label>{{ fecha }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="fechasDelGrupo.length === 0">
+      <ion-label color="medium">No hay fechas disponibles. Puedes proponer algunas abajo.</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-item>
+
+<!-- INPUT PARA FECHAS MANUALES SOLO SI NO HAY FECHAS EN EL GRUPO -->
+<ion-input
+  *ngIf="fechasDelGrupo.length === 0"
+  label="Fechas manuales (separadas por coma)"
+  labelPlacement="floating"
+  formControlName="fechasPropuestas"
+  type="text"
+></ion-input>
+
+
+    <ion-item lines="none">
+      <ion-label>¿Plan público?</ion-label>
+      <ion-toggle formControlName="esPublico" color="primary"></ion-toggle>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" id="infoPublico" class="btn-info-publico">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-popover trigger="infoPublico" triggerAction="click">
+      <ng-template>
+        <ion-content class="ion-padding">
+          Si el plan es público, otros grupos podrán descubrirlo y participar.
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+
+    <ion-button expand="block" color="tertiary" (click)="abrirSelectorUbicacion()">
+      Seleccionar ubicación en mapa
+    </ion-button>
+
+    <ion-item *ngIf="form.get('direccion')?.value" lines="none">
+      <ion-label position="stacked">Ubicación seleccionada</ion-label>
+      <ion-text>{{ form.get('direccion')?.value }}</ion-text>
+    </ion-item>
+
+    <ion-button expand="block" (click)="fileInput.click()">
+      {{ fotoPreview ? 'Cambiar Imagen' : 'Seleccionar Imagen' }}
+    </ion-button>
+
+    <input type="file" hidden #fileInput (change)="onFileSelected($event)" accept="image/*" />
+
+    <ion-img *ngIf="fotoPreview" [src]="fotoPreview" class="preview-img"></ion-img>
+
+  <ion-button expand="block" type="submit" [disabled]="form.invalid || cargando">
+  {{ cargando ? 'Creando...' : 'Crear Plan' }}
+</ion-button>
+
+
+  </form>
+</ion-content>

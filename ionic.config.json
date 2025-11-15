@@ -1,0 +1,7 @@
+{
+  "name": "App-Quedadas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

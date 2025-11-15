@@ -1,0 +1,206 @@
+:host {
+  /* Paleta principal */
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+  --color-principal: #3b82f6;
+  --color-secundario: #8b5cf6;
+  --color-texto: #ffffff;
+  --fondo-tarjeta: #1e293b;
+  --border-radius-cards: 16px;
+  --transition-fast: 0.25s ease;
+}
+
+/* === HEADER === */
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(210, 164, 41, 0.8);
+}
+
+/* Botón rojo estilo moderno */
+ion-button[color="danger"] {
+  font-weight: 700;
+  --background: transparent;
+  --color: var(--ion-text-color);
+  border: 2px solid var(--ion-text-color);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+ion-button[color="danger"]:hover {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+  box-shadow: 0 0 8px var(--ion-text-color);
+}
+
+/* === CONTENT === */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100%;
+}
+
+/* === CARDS === */
+ion-card {
+  --background: var(--fondo-tarjeta);
+  border-radius: var(--border-radius-cards);
+  box-shadow: 0 6px 14px rgba(210, 164, 41, 0.25);
+  color: var(--ion-text-color);
+  margin: 1rem 0;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+ion-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(210, 164, 41, 0.5);
+}
+
+ion-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(210, 164, 41, 0.4);
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--ion-text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Emoticono delante del título */
+ion-card-title::before {
+  content: "⭐";
+  font-size: 1.5rem;
+  display: inline-block;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+
+ion-card-content {
+  padding: 12px 16px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--ion-text-color);
+}
+
+ion-card-content p {
+  margin: 0.4rem 0;
+  font-weight: 500;
+}
+
+/* Botón dentro de la card, estilo fluido y con icono */
+ion-button.expand-block {
+  margin-top: 10px;
+  --background: var(--color-principal);
+  --color: var(--color-texto);
+  font-weight: 700;
+  border-radius: 12px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.5);
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+ion-button.expand-block:hover {
+  --background: var(--color-secundario);
+  box-shadow: 0 6px 14px rgba(139, 92, 246, 0.6);
+}
+
+ion-button.expand-block ion-icon {
+  font-size: 1.3rem;
+}
+
+/* === FECHA FINAL ESTILO CHIPS === */
+.fecha-final {
+  background-color: var(--ion-text-color);
+  color: #000 !important;
+  padding: 8px 14px;
+  border-radius: 24px;
+  margin: 10px 0 8px 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+  user-select: none;
+  width: fit-content;
+  align-self: center;
+}
+
+/* === SPINNER CENTRADO === */
+ion-spinner {
+  display: block;
+  margin: 40px auto;
+  color: var(--ion-text-color);
+}
+
+/* === ESTILOS RESPONSIVOS Y FLUIDOS === */
+@media (max-width: 600px) {
+  ion-content {
+    padding: 1rem 1rem;
+  }
+  ion-card {
+    margin: 0.75rem 0;
+  }
+  ion-card-title {
+    font-size: 1.2rem;
+  }
+  ion-button.expand-block {
+    font-size: 0.9rem;
+  }
+}
+
+/* === MENSAJE DE VACÍO CON EMOTICONO === */
+.sin-favoritos {
+  margin-top: 2rem;
+  color: var(--ion-text-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0.8;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.sin-favoritos::before {
+  content: "💔";
+  font-size: 1.8rem;
+  animation: pulse 3s infinite ease-in-out;
+}

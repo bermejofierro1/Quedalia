@@ -1,0 +1,31 @@
+<ion-content class="ion-padding">
+
+  <!-- 🎥 Vídeo de fondo -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="assets/video/amigos-caravana-video.mp4" type="video/mp4" />
+    Tu navegador no soporta vídeos HTML5.
+  </video>
+
+  <!-- 🧱 Capa oscura opcional -->
+  <div class="overlay"></div>
+
+  <!-- 🌟 Contenido del registro -->
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="assets/images/logo-quedalia.png" alt="Logo" class="logo" />
+      <h1 class="app-name">Quedalia</h1>
+    </div>
+
+    <ion-input placeholder="Email" [(ngModel)]="email" type="email"></ion-input>
+    <ion-input placeholder="Nombre" [(ngModel)]="nombre" type="text"></ion-input>
+
+    <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password" class="input-password"></ion-input>
+
+    <ion-button expand="block" (click)="register()">Crear cuenta</ion-button>
+    <ion-label color="danger">{{ errorMsg }}</ion-label>
+    <div class="registro-footer">
+  <a class="registro-link" routerLink="/login">¿Ya tienes una cuenta?</a>
+</div>
+  </div>
+
+</ion-content>

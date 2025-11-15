@@ -1,0 +1,370 @@
+:host {
+  --color-principal: #3b82f6;
+  --color-secundario: #8b5cf6;
+  --color-texto: #ffffff;
+  --fondo-tarjeta: #1e293b;
+  --bg-page: #0f172a;
+  font-family: "Poppins", sans-serif;
+}
+ion-title{
+  text-align: center;
+}
+
+/* FILTROS CARD */
+.filtros-card {
+  background: var(--fondo-tarjeta);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-texto);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.filtros-card.oculto {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 1.5rem;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+/* TOGGLE FILTROS BUTTON */
+.toggle-filtros-btn {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  --background: var(--color-principal);
+  --color: var(--color-texto);
+  --border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(59, 130, 246, 0.5);
+}
+
+/* WRAPPER FLEX */
+.filtros-wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+/* FILTRO ITEM */
+.filtro-item {
+  position: relative;
+  flex: 1 1 200px;
+  min-width: 180px;
+  cursor: default;
+}
+
+/* LABEL CLICKABLE */
+.filtro-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-principal);
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 25px;
+}
+
+/* Icono flecha al final */
+.filtro-label ion-icon:last-child {
+  margin-left: auto;
+  font-size: 1.3rem;
+  color: var(--color-secundario);
+}
+
+/* Ion-datetime */
+.filtro-datetime {
+  margin-top: 6px;
+  --background: var(--bg-page);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  color: var(--color-texto);
+  width: 100%;
+  box-shadow: inset 0 0 8px rgba(59, 130, 246, 0.5);
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Ion-select dentro del item */
+.filtro-select {
+  --background: var(--bg-page);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  color: var(--color-texto);
+}
+.filtros-card ion-item {
+  --background: transparent !important;
+  --background-focused: transparent !important;
+  --background-hover: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--color-texto);
+}
+
+/* También para que el texto y los iconos se vean bien */
+.filtros-card ion-item ion-label,
+.filtros-card ion-item ion-select {
+  color: var(--color-texto);
+}
+
+/* Opcional: si quieres que la línea inferior desaparezca */
+.filtros-card ion-item[lines="none"] {
+  --inner-border-width: 0;
+}
+
+/* Botón limpiar filtro individual */
+.filtro-item ion-button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  --padding: 0;
+  --min-width: 28px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 20px;
+  --border-radius: 50%;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(255, 0, 0, 0.15);
+  color: #e00;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.filtro-item ion-button:hover {
+  color: #fff;
+  background-color: #e00;
+  box-shadow: 0 0 10px #e00;
+}
+
+/* Botón limpiar todo */
+.limpiar-todo-btn {
+  height: 36px;
+  font-weight: 600;
+  --border-radius: 16px;
+  --box-shadow: 0 3px 8px rgba(59, 130, 246, 0.5);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.limpiar-todo-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+/* Contenedor del botón de filtros */
+.toggle-filtros-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.toggle-filtros-btn {
+  --background: var(--fondo-tarjeta);
+  --color: var(--color-principal);
+  --border-radius: 14px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(2px); /* opcional, para suavidad visual */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.toggle-filtros-btn:hover {
+  --background: color-mix(in srgb, var(--fondo-tarjeta) 80%, #3b82f6);
+  --box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+/*ALBUMES*/
+
+.albums-container {
+  margin-bottom: 2rem;
+}
+
+.albums-title {
+  color: var(--color-texto);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.album-card {
+  background: var(--fondo-tarjeta);
+  color: var(--color-texto);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.album-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.6);
+}
+
+.album-thumbnail-wrapper {
+  width: 100%;
+  height: 140px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.album-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.album-icon {
+  font-size: 64px;
+  color: var(--color-secundario);
+}
+
+ion-card-header {
+  padding: 0.75rem 1rem 0 1rem;
+  flex-grow: 1;
+}
+
+ion-card-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-texto);
+  margin-bottom: 0.15rem;
+}
+
+ion-card-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-secundario);
+}
+
+ion-card-content {
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.album-fotos-count {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-principal);
+  text-align: right;
+}
+
+
+/*FOTOS*/
+.foto-card {
+  background: var(--fondo-tarjeta);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.foto-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.foto-galeria {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.foto-info {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.fecha-subida,
+.usuario-subida {
+  color: var(--color-texto);
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+
+
+/* Responsive */
+@media (max-width: 480px) {
+  .filtros-wrapper {
+    flex-direction: column;
+  }
+  .filtro-item {
+    min-width: 100%;
+    flex: 1 1 auto;
+  }
+  .limpiar-todo-btn {
+    width: 100%;
+  }
+}
+/*BOTÓN PARA DESCARGAR IMAGEN*/
+.foto-card {
+  position: relative;
+}
+
+.boton-descarga {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  --background: rgba(255, 255, 255, 0.7);
+  --box-shadow: none;
+}
+
+//EFECTO RECARGA
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

@@ -1,0 +1,51 @@
+<ion-content class="ion-padding" fullscreen="true" [scrollEvents]="true">
+
+  <!-- 🎥 Vídeo de fondo -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="assets/video/amigos-caravana-video.mp4" type="video/mp4" />
+    Tu navegador no soporta vídeos HTML5.
+  </video>
+
+  <!-- 🧱 Capa oscura opcional -->
+  <div class="overlay"></div>
+
+  <!-- 🌟 Contenido del login -->
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="assets/images/logo-quedalia.png" alt="Logo" class="logo" />
+      <h1 class="app-name">Quedalia</h1>
+    </div>
+<br>
+ <div class="email-container">
+  <ion-input
+    type="email"
+    placeholder="Email"
+    [(ngModel)]="email"
+    (ionInput)="onEmailInput($event)"
+    (ionFocus)="onEmailFocus()"
+    (ionBlur)="onEmailBlur()"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="none"
+  ></ion-input>
+
+  <ion-list *ngIf="mostrarSugerencias && emailsFiltrados.length > 0" class="lista-sugerencias">
+    <ion-item button *ngFor="let e of emailsFiltrados" (click)="seleccionarEmail(e)">
+      {{ e }}
+    </ion-item>
+  </ion-list>
+</div>
+
+
+    <ion-input placeholder="Contraseña" [(ngModel)]="password" type="password"></ion-input>
+    <ion-button expand="block" (click)="login()">Entrar</ion-button>
+<ion-note color="danger" *ngIf="errorMsg">{{ errorMsg }}</ion-note>
+   <!-- <ion-button fill="clear" routerLink="/register">¿No tienes cuenta?</ion-button>-->
+  </div>
+  
+<div class="registro-footer" *ngIf="!tecladoAbierto">
+  <a class="registro-link" routerLink="/register">¿No tienes cuenta?</a>
+</div>
+
+
+</ion-content>

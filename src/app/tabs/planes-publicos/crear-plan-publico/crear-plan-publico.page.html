@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Plan Público</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="crearPlan()" novalidate>
+
+    <ion-input label="Título" labelPlacement="floating" formControlName="titulo" type="text" required></ion-input>
+
+    <ion-textarea label="Descripción" labelPlacement="floating" formControlName="descripcion" required></ion-textarea>
+
+    <ion-item>
+      <ion-label>Ciudad</ion-label>
+      <ion-select formControlName="ciudad" interface="popover" placeholder="Selecciona ciudad" (ionChange)="onCiudadChange($event)">
+        <ion-select-option value="Madrid">Madrid</ion-select-option>
+        <ion-select-option value="Barcelona">Barcelona</ion-select-option>
+        <ion-select-option value="Valencia">Valencia</ion-select-option>
+        <ion-select-option value="Sevilla">Sevilla</ion-select-option>
+        <ion-select-option value="Otra">Otra</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-input *ngIf="mostrarInputCiudadPersonalizada" label="Introduce tu ciudad" labelPlacement="floating" formControlName="ciudadPersonalizada" type="text"></ion-input>
+
+    <ion-item>
+      <ion-label position="stacked">Fechas del plan</ion-label>
+      <ion-datetime
+        multiple="true"
+        presentation="date"
+        formControlName="fechasPropuestas"
+        [showDefaultButtons]="true"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-button expand="block" color="tertiary" (click)="abrirSelectorUbicacion()">
+      Seleccionar ubicación en mapa
+    </ion-button>
+
+    <ion-item *ngIf="form.get('direccion')?.value" lines="none">
+      <ion-label position="stacked">Ubicación seleccionada</ion-label>
+      <ion-text>{{ form.get('direccion')?.value }}</ion-text>
+    </ion-item>
+
+    <ion-button expand="block" (click)="fileInput.click()">
+      {{ fotoPreview ? 'Cambiar Imagen' : 'Seleccionar Imagen' }}
+    </ion-button>
+
+    <input type="file" hidden #fileInput (change)="onFileSelected($event)" accept="image/*" />
+    <ion-img *ngIf="fotoPreview" [src]="fotoPreview" class="preview-img"></ion-img>
+
+    <ion-button expand="block" type="submit" [disabled]="form.invalid || cargando">
+      {{ cargando ? 'Creando...' : 'Crear Plan Público' }}
+    </ion-button>
+
+  </form>
+</ion-content>

@@ -1,0 +1,327 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+  --color-principal: #3b82f6;
+  --color-secundario: #8b5cf6;
+  --color-texto: #ffffff;
+  --fondo-tarjeta: #1e293b;
+  --border-radius: 16px;
+  --transition-fast: 0.25s ease;
+}
+
+/* === HEADER === */
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(210, 164, 41, 0.8);
+}
+/* Ion title del header más pequeño */
+ion-toolbar ion-title {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Botón rojo */
+/* Botón eliminar más pequeño */
+ion-toolbar ion-button[color="danger"] {
+  font-weight: 600;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 4px;
+  --padding-bottom: 4px;
+  font-size: 0.75rem;
+  height: 30px;
+  border-radius: 8px;
+  min-width: auto;
+  --background: transparent;
+  --color: var(--ion-text-color);
+  border: 1.5px solid var(--ion-text-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+}
+
+ion-toolbar ion-button[color="danger"]:hover {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+  box-shadow: 0 0 6px var(--ion-text-color);
+}
+
+/* === CONTENT === */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1rem 1rem 5rem; /* espacio inferior para boton fijo */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Imagen cabecera */
+/* Botón favorito sobre imagen */
+.grupo-portada {
+  position: relative;
+  height: 210px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin: 5px 0 18px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: var(--border-radius);
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  .portada-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: #fff;
+    text-shadow: 1px 1px 6px #000;
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  /* Botón favorito estilo */
+  .btn-favorito-imagen {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    --padding-start: 6px;
+    --padding-end: 6px;
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+    --background: rgba(210, 164, 41, 0.85);
+    color: #000;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(210, 164, 41, 0.9);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 20;
+  }
+
+  .btn-favorito-imagen ion-icon {
+    font-size: 22px;
+  }
+
+  .btn-favorito-imagen:hover {
+    --background: rgba(255, 223, 89, 1);
+    color: #000;
+    box-shadow: 0 0 14px rgba(255, 223, 89, 1);
+  }
+}
+
+
+/* Tarjetas */
+ion-card {
+  --background: var(--fondo-tarjeta);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(210, 164, 41, 0.25);
+  color: var(--color-texto);
+  margin-top: 16px;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(210, 164, 41, 0.4);
+  }
+}
+
+ion-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* Contenido info */
+.detalle-info-card {
+  background: var(--fondo-tarjeta);
+  border-radius: var(--border-radius);
+  padding: 18px 18px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: var(--color-texto);
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-principal);
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 14px;
+
+  ion-icon {
+    font-size: 1.6rem;
+    color: var(--color-secundario);
+  }
+
+  label {
+    font-size: 0.9rem;
+    color: #a5b4fc;
+    width: 120px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+}
+
+/* Botón expulsar */
+.btn-expulsar {
+  --background: transparent;
+  --color: #e74c3c;
+  --border: 1.5px solid #e74c3c;
+  --border-radius: 6px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 6px;
+  --padding-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: auto;
+}
+
+.btn-expulsar:hover {
+  --background: #e74c3c;
+  --color: white;
+  box-shadow: 0 0 8px #e74c3c;
+}
+
+/* Solicitudes */
+.solicitud-card {
+  margin-bottom: 16px;
+  padding: 10px;
+  background: rgba(11, 118, 140, 0.7);
+  border: 1.5px solid rgba(210, 164, 41, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(210, 164, 41, 0.35);
+  transition: background-color 0.3s ease;
+}
+
+.solicitud-usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.solicitud-estado ion-chip {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.solicitud-votos {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.solicitud-acciones ion-button {
+  margin-right: 10px;
+}
+
+/* Miembros */
+.miembros-card ion-card-header {
+  cursor: pointer;
+}
+
+.miembros-card ion-item {
+  --background: transparent;
+  color: var(--ion-text-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.miembros-card ion-note {
+  font-size: 0.8rem;
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+/* Fixed bottom - Solicitar unirse */
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ion-background-color);
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.4);
+  padding: 12px 20px;
+  z-index: 9999;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.fixed-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mensaje-unete {
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #042b33;
+  }
+
+  ion-card {
+    --background: #0a5067;
+    box-shadow: 0 4px 14px rgba(210, 164, 41, 0.5);
+  }
+
+  .detalle-info-card {
+    background: #083546;
+  }
+
+  .btn-favorito {
+    --background: rgba(210, 164, 41, 0.25);
+  }
+}

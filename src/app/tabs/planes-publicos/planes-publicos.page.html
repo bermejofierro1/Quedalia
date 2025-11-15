@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Planes Públicos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #contentRef class="blur-container">
+     <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+  <!-- Filtros -->
+  <div class="filtros-container">
+    <ion-input
+      type="text"
+      label="Ciudad"
+      placeholder="Filtrar por ciudad"
+      [(ngModel)]="filtroCiudad"
+      (ionInput)="aplicarFiltros()"
+    ></ion-input>
+
+    <ion-item lines="none">
+      <ion-label>Fecha</ion-label>
+      <ion-button fill="clear" id="btnSeleccionarFecha">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+      <ion-label *ngIf="filtroFechaExacta" class="fecha-seleccionada">
+        {{ filtroFechaExacta | date:'dd/MM/yyyy' }}
+      </ion-label>
+    </ion-item>
+
+    <!-- Popover para seleccionar fecha -->
+<ion-popover #popover trigger="btnSeleccionarFecha" showBackdrop="true">
+  <ng-template>
+    <div class="ion-padding">
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="filtroFechaExacta"
+        (ionChange)="onFechaSeleccionada(popover)"
+        color="tertiary"
+      ></ion-datetime>
+
+      <ion-button
+        *ngIf="!filtroFechaExacta"
+        expand="block"
+        size="small"
+        fill="outline"
+        (click)="seleccionarHoy(popover)"
+      >
+        Hoy
+      </ion-button>
+
+      <ion-button
+        *ngIf="filtroFechaExacta"
+        expand="block"
+        size="small"
+        fill="clear"
+        color="danger"
+        (click)="limpiarFecha(popover)"
+      >
+        Limpiar
+      </ion-button>
+    </div>
+  </ng-template>
+</ion-popover>
+  </div>
+
+  <div class="filtros-botones">
+    <ion-button color="primary" expand="block" (click)="aplicarFiltros()">Aplicar</ion-button>
+    <ion-button color="medium" expand="block" (click)="resetFiltros()">Limpiar</ion-button>
+  </div>
+
+  <ion-spinner
+    name="crescent"
+    *ngIf="cargandoFiltros"
+    class="spinner-filtros"
+  ></ion-spinner>
+
+  <ion-list *ngIf="planes.length > 0; else sinPlanes">
+    <ion-item
+      *ngFor="let plan of planesFiltrados"
+      (click)="verDetalle(plan.id)"
+      class="plan-item"
+      [ngStyle]="{ 'background-image': plan.foto ? 'url(' + plan.foto + ')' : 'none' }"
+      lines="none"
+      button
+    >
+      <ion-label class="plan-label">
+        <h2>{{ plan.titulo }}</h2>
+        <p>{{ plan.descripcion }}</p>
+        <br>
+        <small class="plan-detalles">
+          {{ plan.ciudad || 'Ciudad no definida' }} &bull;
+          Fecha(s): {{ plan.fechasPropuestas?.join(', ') || 'Sin fechas' }}
+        </small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #sinPlanes>
+    <p>No hay planes públicos disponibles por ahora.</p>
+  </ng-template>
+
+  <div class="fab-con-texto" (click)="irACrearPlanPublico()">
+    <ion-fab-button color="success">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <span>Nuevo plan</span>
+  </div>
+  </div>
+</ion-content>
+
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>

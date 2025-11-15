@@ -1,0 +1,207 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+  --ion-secondary-bg: #0b768c;
+  --ion-light-bg: #e6f4f6;
+  --ion-dark-bg: #063b49;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header */
+ion-header {
+  background-color: var(--ion-dark-bg);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.4);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+}
+
+ion-title {
+  text-align: center;
+  color: var(--ion-text-color);
+  text-shadow: 0 0 8px rgba(210, 164, 41, 0.9);
+}
+
+/* Content */
+ion-content {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1.5rem 1.25rem;
+}
+
+/* Botón toggle añadir fecha */
+.btn-toggle-form {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(210, 164, 41, 0.35);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Card formulario */
+.form-card {
+  background-color: var(--ion-secondary-bg);
+  border-radius: 16px;
+  box-shadow: 0 5px 14px rgba(210, 164, 41, 0.25);
+  margin-bottom: 1.5rem;
+  color: var(--ion-text-color);
+}
+
+ion-card-header {
+  border-bottom: 1px solid rgba(210, 164, 41, 0.3);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+}
+
+/* Inputs */
+ion-item {
+  --background: transparent;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.15);
+  color: var(--ion-text-color);
+}
+
+ion-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ion-text-color);
+}
+
+/* Lista de propuestas */
+.lista-propuestas {
+  background-color: var(--ion-secondary-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(210, 164, 41, 0.15);
+  margin-bottom: 1.5rem;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.propuesta-item {
+  border-radius: 12px;
+  margin: 6px 12px;
+  padding: 8px 14px;
+  background: linear-gradient(145deg, #126a91, #06415c);
+  color: var(--ion-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.propuesta-item:hover {
+  box-shadow: 0 0 12px 3px rgba(210, 164, 41, 0.6);
+}
+
+.propuesta-label h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.propuesta-label p {
+  margin: 2px 0 0;
+  font-size: 0.875rem;
+  color: #ffe8a6;
+}
+
+/* Badge para votos */
+.badge-voto {
+  font-size: 1.5rem;
+  min-width: 2.4em;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.badge-voto ion-icon {
+  vertical-align: middle;
+}
+
+/* Card gráfico */
+.grafico-card {
+  background-color: var(--ion-secondary-bg);
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(210, 164, 41, 0.25);
+  margin-bottom: 2rem;
+  color: var(--ion-text-color);
+}
+
+.grafico-card ion-card-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--ion-text-color);
+}
+
+canvas {
+  width: 100% !important;
+  height: 220px !important;
+  margin-top: 8px;
+}
+
+/* Estado votación */
+.estado-votacion {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--ion-text-color);
+}
+
+/* Botón cerrar votación */
+ion-button[color="danger"] {
+  --background: #d24444;
+  --box-shadow: 0 4px 12px rgba(210, 60, 60, 0.5);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: background-color 0.25s ease;
+}
+
+ion-button[color="danger"]:disabled {
+  --background: #a66b6b;
+  --box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Scroll barra personalizada para propuestas (opcional) */
+.lista-propuestas::-webkit-scrollbar {
+  width: 8px;
+}
+.lista-propuestas::-webkit-scrollbar-track {
+  background: var(--ion-secondary-bg);
+  border-radius: 16px;
+}
+.lista-propuestas::-webkit-scrollbar-thumb {
+  background-color: #d2a429;
+  border-radius: 16px;
+  border: 2px solid var(--ion-secondary-bg);
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 480px) {
+  ion-toolbar {
+    font-size: 1.1rem;
+  }
+  .propuesta-label h2 {
+    font-size: 1rem;
+  }
+  .btn-toggle-form {
+    font-size: 1rem;
+  }
+}

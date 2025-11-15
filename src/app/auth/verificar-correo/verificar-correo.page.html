@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verifica tu correo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>📩 Te hemos enviado un correo de verificación a <strong>{{ email }}</strong>.</p>
+  <p>Por favor, revisa tu bandeja de entrada y confirma tu cuenta.</p>
+
+  <ion-button expand="block" routerLink="/login">Ya lo he verificado</ion-button>
+
+  <ion-button expand="block" color="secondary" [disabled]="sending" (click)="reenviarCorreoVerificacion()">
+    Reenviar correo de verificación
+  </ion-button>
+
+  <p *ngIf="message" style="margin-top: 1rem; color: yellow;">{{ message }}</p>
+</ion-content>

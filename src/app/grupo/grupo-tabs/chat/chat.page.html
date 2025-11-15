@@ -1,0 +1,28 @@
+<ion-content class="ion-padding">
+  <div *ngFor="let grupo of mensajesAgrupados">
+    <div
+      class="grupo-wrapper"
+      [ngClass]="{ 'propio': grupo.autorId === userId, 'otro': grupo.autorId !== userId }"
+    >
+      <div class="grupo-mensajes">
+        <div class="nombre">
+          {{ grupo.autorId === userId ? 'Yo' : grupo.autorNombre }}
+        </div>
+
+        <div *ngFor="let mensaje of grupo.mensajes" class="mensaje">
+          <div class="texto">{{ mensaje.texto }}</div>
+          <div class="hora">{{ mensaje.hora }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-footer class="input-footer">
+    <ion-item>
+      <ion-input [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></ion-input>
+      <ion-button fill="clear" slot="end" (click)="enviar()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-footer>
+</ion-content>

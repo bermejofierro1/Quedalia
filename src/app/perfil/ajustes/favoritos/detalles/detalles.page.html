@@ -1,0 +1,210 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/planes-publicos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>📋 Detalle Plan Público</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="eliminarPlan()">
+        🗑️ Eliminar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="plan">
+
+  <div class="grupo-portada">
+    <img [src]="plan.foto || 'assets/img/default-group.jpg'" alt="Foto del plan" />
+      <ion-button *ngIf="!esCreador" fill="clear" (click)="toggleFavorito()" class="btn-favorito-imagen" title="{{ esFavorito ? 'Guardado' : 'Guardar' }}">
+  <ion-icon [name]="esFavorito ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+</ion-button>
+
+    <div class="portada-overlay">
+      <h1>✨ {{ plan.titulo }}</h1>
+    </div>
+  </div>
+
+
+
+  <ion-card *ngIf="estadoSolicitud" class="estado-solicitud-card">
+    <ion-card-content>
+      <ion-chip *ngIf="estadoSolicitud === 'pendiente'" color="warning">
+        ⏳
+        <ion-label>Solicitud pendiente</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="estadoSolicitud === 'aceptada'" color="success">
+        ✅
+        <ion-label>Ya eres parte del plan</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="estadoSolicitud === 'rechazada'" color="danger">
+        ❌
+        <ion-label>Solicitud rechazada</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Información general -->
+  <div class="detalle-info-card">
+    <div class="info-header">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Información del plan</span>
+    </div>
+
+    <div class="info-line">
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <div>
+        <label>👤 Creador</label>
+        <p>{{ creadorNombre }}</p>
+      </div>
+    </div>
+
+    <div class="info-line">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <div>
+        <label>📅 Fechas propuestas</label>
+        <p>
+          <span *ngFor="let f of plan.fechasPropuestas; let last = last">
+            {{ f }}<span *ngIf="!last">, </span>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="info-line">
+      <ion-icon name="location-outline"></ion-icon>
+      <div>
+        <label>📍 Ciudad</label>
+        <p>{{ plan.ciudad }}</p>
+      </div>
+    </div>
+
+    <div class="info-line">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <div>
+        <label>📝 Descripción</label>
+        <p>{{ plan.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>📌 Ubicación del evento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="map" style="height: 300px; border-radius: 12px; overflow: hidden;"></div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Creador: Solicitudes -->
+  <ion-card *ngIf="esCreador && solicitudes.length > 0" class="solicitudes-card">
+    <ion-card-header>
+      <ion-card-title>🙋 Solicitudes para unirse</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngFor="let solicitud of solicitudes">
+        <ion-card class="solicitud-card">
+          <ion-card-content>
+            <div class="solicitud-usuario">
+              <ion-avatar slot="start" *ngIf="solicitud.fotoUsuario">
+                <img [src]="solicitud.fotoUsuario" alt="Foto usuario" />
+              </ion-avatar>
+              <ion-icon *ngIf="!solicitud.fotoUsuario" name="person-circle-outline" color="primary"></ion-icon>
+              <strong>{{ solicitud.nombreUsuario || solicitud.uid }}</strong>
+            </div>
+
+            <div class="solicitud-estado">
+              <ion-chip *ngIf="solicitud.estado === 'pendiente'" color="warning">⏳ Pendiente</ion-chip>
+              <ion-chip *ngIf="solicitud.estado === 'aceptada'" color="success">✅ Aceptada</ion-chip>
+              <ion-chip *ngIf="solicitud.estado === 'rechazada'" color="danger">❌ Rechazada</ion-chip>
+            </div>
+
+            <div class="solicitud-votos" *ngIf="solicitud.estado === 'pendiente'">
+              <ion-text color="success">👍 A favor: {{ contarVotos(solicitud, 'aceptar') }}</ion-text><br />
+              <ion-text color="danger">👎 En contra: {{ contarVotos(solicitud, 'rechazar') }}</ion-text>
+            </div>
+
+            <div class="solicitud-acciones">
+              <ion-buttons>
+                <ion-button size="small" color="primary" (click)="decidirSolicitud(solicitud.uid, 'aceptada')">Aceptar</ion-button>
+                <ion-button size="small" color="medium" (click)="decidirSolicitud(solicitud.uid, 'rechazada')">Rechazar</ion-button>
+              </ion-buttons>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Colaboradores: Votaciones -->
+  <ion-card *ngIf="!esCreador && esColaborador && solicitudes.length > 0" class="solicitudes-card">
+    <ion-card-header>
+      <ion-card-title>🗳️ Votaciones de solicitudes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngFor="let solicitud of solicitudes">
+        <ion-card class="solicitud-card" *ngIf="solicitud.estado === 'pendiente'">
+          <ion-card-content>
+            <div class="solicitud-usuario">
+              <ion-avatar slot="start" *ngIf="solicitud.fotoUsuario">
+                <img [src]="solicitud.fotoUsuario" alt="Foto usuario" />
+              </ion-avatar>
+              <ion-icon *ngIf="!solicitud.fotoUsuario" name="person-circle-outline" color="primary"></ion-icon>
+              <strong>{{ solicitud.nombreUsuario || solicitud.uid }}</strong>
+            </div>
+
+            <div class="solicitud-votos">
+              <ion-text color="success">👍 A favor: {{ contarVotos(solicitud, 'aceptar') }}</ion-text><br />
+              <ion-text color="danger">👎 En contra: {{ contarVotos(solicitud, 'rechazar') }}</ion-text>
+            </div>
+
+            <div class="solicitud-acciones">
+              <ion-buttons>
+                <ion-button size="small" color="success" (click)="votarSolicitud(solicitud.uid, 'aceptar')">✅</ion-button>
+                <ion-button size="small" color="danger" (click)="votarSolicitud(solicitud.uid, 'rechazar')">❌</ion-button>
+              </ion-buttons>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Miembros -->
+  <ion-card *ngIf="esMiembroAutorizado() && miembrosPlan.length" class="miembros-card">
+    <ion-card-header (click)="toggleMostrarMiembros()" style="cursor: pointer;">
+      <ion-card-title>
+        👥 Miembros del plan
+        <ion-icon [name]="mostrarMiembros ? 'chevron-up' : 'chevron-down'" style="float: right;"></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="mostrarMiembros">
+      <ion-list>
+        <ion-item *ngFor="let miembro of miembrosPlan">
+          <ion-avatar slot="start" *ngIf="miembro.foto">
+            <img [src]="miembro.foto" alt="Foto miembro" />
+          </ion-avatar>
+          <ion-icon *ngIf="!miembro.foto" name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label>
+            {{ miembro.nombre }}
+            <ion-note color="medium" *ngIf="miembro.rol === 'creador'">⭐ Creador</ion-note>
+            <ion-note color="primary" *ngIf="miembro.rol === 'colaborador'">🛠 Colaborador</ion-note>
+          </ion-label>
+          <ion-button *ngIf="esCreador && miembro.rol !== 'creador'" class="btn-expulsar" size="small" (click)="expulsarMiembro(miembro.uid)">
+            ❌ Expulsar
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón fijo solicitud unión -->
+  <div class="fixed-bottom" *ngIf="!esCreador && !esColaborador && !yaSolicitado">
+    <div class="fixed-bottom-content">
+      <span class="mensaje-unete">🤝 Únete y disfruta</span>
+      <ion-button size="small" color="primary" (click)="solicitarUnirse()">Solicitar</ion-button>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,137 @@
+
+
+
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 5px rgba(210, 164, 41, 0.6);
+}
+
+
+ion-list {
+  --background: transparent;
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 8px;
+  --min-height: 70px;
+  border-bottom: 1px solid rgba(210, 164, 41, 0.3);
+  --background: #0a4a63;
+  color: var(--ion-text-color, #d2a429);
+  --inner-padding-end: 0;
+  border-radius: 10px;
+  margin: 6px 12px;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.2);
+}
+
+ion-label {
+  font-size: 1rem;
+  color: var(--ion-text-color, #d2a429);
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-word;
+}
+
+ion-label small {
+  color: rgba(210, 164, 41, 0.7);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: block;
+}
+
+ion-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+ion-button {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  min-width: 110px;
+  --border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-button ion-icon {
+  margin-right: 6px;
+  font-size: 1.2rem;
+}
+
+/* Botón "Marcar como leído" verde */
+ion-button[color="success"] {
+  --background: #d2a429;
+  --color: #063f4e;
+  --box-shadow: 0 2px 5px rgba(210, 164, 41, 0.5);
+}
+
+/* Botón "Eliminar" rojo */
+ion-button[color="danger"] {
+  --background: #e03e3e;
+  --color: white;
+  --box-shadow: 0 2px 5px rgba(224, 62, 62, 0.5);
+}
+
+/* Mensaje cuando no hay notificaciones */
+p.ion-padding {
+  text-align: center;
+  color: var(--ion-text-color, #d2a429);
+  opacity: 0.7;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+//=======EFECTO RECARGA DE LA PÁGINA=============
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

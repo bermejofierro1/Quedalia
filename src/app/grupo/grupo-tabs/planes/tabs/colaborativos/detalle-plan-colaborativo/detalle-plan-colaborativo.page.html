@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/grupo"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle Plan</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="eliminarPlan()">Eliminar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="plan">
+  <div #contentRef class="blur-container">
+    <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+  <!-- ✅ Imagen destacada con título superpuesto -->
+  <div class="imagen-portada">
+    <ion-img *ngIf="plan.foto" [src]="plan.foto" class="imagen-grupo"></ion-img>
+    <div class="titulo-superpuesto">
+      {{ plan.titulo }}
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ plan.titulo }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Descripción:</strong> {{ plan.descripcion }}</p>
+      
+   <p class="creador-info">
+  <img *ngIf="creadorFoto" [src]="creadorFoto" alt="Foto creador" />
+  Creador: {{ creadorNombre }}
+</p>
+
+
+      <p><strong>Fecha de creación:</strong> {{ plan.fechaCreacion?.toDate() | date:'medium' }}</p>
+
+     <!-- Solo mostrar las fechas propuestas si NO hay una fecha final -->
+<p *ngIf="!fechaFinalElegida"><strong>Fechas propuestas:</strong></p>
+<ul *ngIf="!fechaFinalElegida">
+  <li *ngFor="let fecha of plan.fechasPropuestas">{{ fecha }}</li>
+</ul>
+
+
+      <!-- ✅ Fecha final elegida -->
+      <p *ngIf="fechaFinalElegida" class="fecha-final">
+        <strong>📅 Fecha Final Elegida:</strong>
+        <span class="fecha-texto-negro"> {{ fechaFinalElegida }}</span>
+      </p>
+
+      <p><strong>Lugares propuestos:</strong></p>
+      <ul>
+        <li *ngFor="let lugar of plan.lugaresPropuestos">{{ lugar }}</li>
+      </ul>
+
+      <ion-button expand="block" color="primary" (click)="verVotaciones(planId)"   [disabled]="plan.votacionEstado === 'cerrada'">
+        Ir a votaciones de Fechas
+      </ion-button>
+
+      <p><strong>Estado de votación:</strong> {{ plan.votacionEstado }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mapa -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ubicación del evento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="map" style="height: 300px;"></div>
+    </ion-card-content>
+  </ion-card>
+  </div>
+</ion-content>

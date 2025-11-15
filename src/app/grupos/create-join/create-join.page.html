@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Grupo</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/grupos">Volver</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input label="Nombre del grupo" labelPlacement="floating" [(ngModel)]="nombre" required></ion-input>
+
+  <ion-textarea label="Descripción" labelPlacement="floating" [(ngModel)]="descripcion"></ion-textarea>
+
+  <div class="ion-margin-top">
+    <ion-button expand="block" (click)="fileInput.click()">Seleccionar Foto</ion-button>
+    <input type="file" hidden #fileInput (change)="onFileSelected($event)" accept="image/*">
+  </div>
+
+  <ion-img *ngIf="fotoPreview" [src]="fotoPreview" class="preview-img"></ion-img>
+
+  <ion-button expand="block" (click)="crearGrupo()">Crear grupo</ion-button>
+
+  <ion-text color="danger" *ngIf="errorMsg">{{ errorMsg }}</ion-text>
+</ion-content>

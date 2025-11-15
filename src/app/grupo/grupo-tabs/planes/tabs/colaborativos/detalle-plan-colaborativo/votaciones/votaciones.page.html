@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Votaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!loading">
+  <div #contentRef class="blur-container">
+
+ <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ plan?.titulo }}</ion-card-title>
+      <ion-card-subtitle>Selecciona tus fechas preferidas</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let fecha of plan?.fechasPropuestas">
+          <ion-label>{{ fecha }}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="votosFechas[fecha]"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" (click)="enviarVoto()" [disabled]="plan?.votacionEstado === 'cerrada'">
+    Enviar voto
+  </ion-button>
+
+ <ion-button
+  *ngIf="plan?.creadoPor === currentUserId && plan?.votacionEstado !== 'cerrada'"
+  expand="full"
+  color="danger"
+  (click)="cerrarVotacion()"
+>
+  Cerrar votaciones
+</ion-button>
+
+
+
+  <ion-text color="danger" *ngIf="plan?.votacionEstado === 'cerrada'">
+    <p class="ion-text-center">La votación está cerrada.</p>
+  </ion-text>
+
+  <ion-card *ngIf="plan">
+    <ion-card-header>
+      <ion-card-title>{{ plan.titulo }}</ion-card-title>
+      <ion-card-subtitle>Votaciones</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <canvas #graficoFechas></canvas>
+    </ion-card-content>
+  </ion-card>
+  </div>
+</ion-content>
+
+
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>

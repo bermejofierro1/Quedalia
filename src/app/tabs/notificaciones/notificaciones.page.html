@@ -1,0 +1,40 @@
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <div #contentRef class="blur-container">
+     <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+<ion-list *ngIf="notificaciones.length > 0; else noNotis">
+  <ion-item *ngFor="let noti of notificaciones">
+    <ion-label>
+      {{ noti.mensaje }}<br />
+      <small>{{ noti.fecha?.toDate() | date:'medium' }}</small>
+    </ion-label>
+    <ion-buttons slot="end">
+     <ion-button *ngIf="!noti.leido" color="success" (click)="marcarLeida(noti.id)">
+  <ion-icon name="checkmark-done-outline"></ion-icon> Leído
+</ion-button>
+<ion-button color="danger" (click)="eliminar(noti.id)">
+  <ion-icon name="trash-outline"></ion-icon> Eliminar
+</ion-button>
+
+    </ion-buttons>
+  </ion-item>
+</ion-list>
+
+<ng-template #noNotis>
+  <p class="ion-padding">No tienes notificaciones.</p>
+</ng-template>
+   </div>
+</ion-content>
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Planes Colaborativos</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #contentRef class="blur-container">
+    <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+
+
+ <ion-list *ngIf="!loading && planes.length > 0">
+  <ion-item
+    *ngFor="let plan of planes"
+    (click)="verDetalle(plan.id)"
+    class="plan-item"
+    [ngStyle]="{
+      'background-image': plan.foto ? 'url(' + plan.foto + ')' : 'none'
+    }"
+  >
+    <ion-label class="plan-label">
+      <h2>{{ plan.titulo }}</h2>
+      <p>{{ plan.descripcion }}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+
+  <ion-spinner *ngIf="loading"></ion-spinner>
+
+  <p *ngIf="!loading && planes.length === 0">No hay planes colaborativos.</p>
+  </div>
+</ion-content>

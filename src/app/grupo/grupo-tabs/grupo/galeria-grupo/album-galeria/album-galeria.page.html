@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/grupos/galeria-grupo"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ nombreAlbum }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <div #contentRef class="blur-container">
+    <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+  <!-- Grid fotos -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" size-sm="4" size-md="3" *ngFor="let foto of fotos">
+        <ion-card class="foto-card" button (click)="ampliarImagen(foto)" 
+         (mousedown)="startPress(foto)"
+  (touchstart)="startPress(foto)"
+  (mouseup)="cancelPress()"
+  (mouseleave)="cancelPress()"
+  (touchend)="cancelPress()">
+          <img [src]="foto.url" alt="Foto de álbum" class="foto-galeria" />
+          <ion-card-content>
+            <ion-text color="medium" class="fecha-subida">
+              {{ foto.fechaSubida?.toDate ? (foto.fechaSubida.toDate() | date:'short') : (foto.fechaSubida | date:'short') }}
+            </ion-text>
+            <ion-text color="medium" class="usuario-subida" title="{{ foto.nombreUsuario || 'Desconocido' }}">
+              📷 {{ foto.nombreUsuario || 'Desconocido' }}
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+ 
+  </div>
+
+   <!-- Botón flotante para añadir imagen -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="seleccionarImagen()" aria-label="Añadir Foto">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Input oculto para seleccionar archivos -->
+  <input type="file" accept="image/*" multiple #fileInput hidden (change)="subirFotos($event)" />
+
+</ion-content>
+<!-- Overlay para la carga-->
+<div *ngIf="isLoading" class="loading-overlay">
+  <ion-spinner name="crescent" color="light"></ion-spinner>
+  <p class="loading-text">Cargando...</p>
+</div>

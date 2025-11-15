@@ -1,0 +1,74 @@
+
+ion-title{
+  text-align: center;
+}
+
+
+
+.foto-card {
+  background: var(--fondo-tarjeta);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.foto-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.5);
+}
+
+.foto-galeria {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+ion-card-content {
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-texto);
+}
+
+.fecha-subida, .usuario-subida {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 45%;
+  opacity: 0.8;
+}
+//EFECTO RECARGA
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

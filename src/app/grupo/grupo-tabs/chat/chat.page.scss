@@ -1,0 +1,109 @@
+:host {
+  --ion-background-color: #085062; /* azul oscuro */
+  --ion-text-color: #d2a429;       /* dorado */
+  --ion-color-chat-yo: #d2a429;    /* dorado para burbujas propias */
+  --ion-color-chat-otro: #0b768c;  /* azul más claro para burbujas ajenas */
+}
+
+ion-content {
+  --background: var(--ion-background-color);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  color: var(--ion-text-color);
+}
+
+/* Wrapper general para cada grupo de mensajes */
+.grupo-wrapper {
+  display: flex;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.grupo-wrapper.propio {
+  justify-content: flex-end;
+  background-color: var(--ion-color-chat-yo); /* fondo dorado para propios */
+  padding: 6px 10px;
+  border-radius: 12px;
+  border-top-right-radius: 0;
+}
+
+.grupo-wrapper.otro {
+  justify-content: flex-start;
+  background-color: var(--ion-color-chat-otro); /* fondo azul claro para otros */
+  padding: 6px 10px;
+  border-radius: 12px;
+  border-top-left-radius: 0;
+}
+
+/* Contenedor de los mensajes del grupo */
+.grupo-mensajes {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nombre del autor */
+.nombre {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--ion-text-color);
+}
+
+/* Mensaje individual */
+.mensaje {
+  background: transparent;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: black; /* Texto negro dentro de la burbuja */
+  font-size: 0.95rem;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+/* Hora del mensaje */
+.hora {
+  font-size: 0.65rem;
+  color: #555555;
+  text-align: right;
+  margin-top: 2px;
+}
+
+/* Footer del input */
+.input-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--ion-background-color);
+  padding: 8px 12px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Input y botón */
+.input-footer ion-item {
+  --background: #0b768c;
+  border-radius: 20px;
+  padding-left: 12px;
+  --min-height: 40px;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.input-footer ion-input {
+  color: var(--ion-text-color);
+}
+
+.input-footer ion-button {
+  color: var(--ion-text-color);
+  --background: transparent;
+  margin-left: 8px;
+  font-size: 1.4rem;
+}

@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/grupos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Fechas del Grupo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding fechas-page">
+
+  <ion-button 
+    expand="block" 
+    [color]="mostrarFormulario ? 'danger' : 'primary'" 
+    (click)="mostrarFormulario = !mostrarFormulario"
+    class="btn-toggle-form">
+    <ion-icon slot="start" [name]="mostrarFormulario ? 'close-circle' : 'add-circle'"></ion-icon>
+    {{ mostrarFormulario ? 'Cancelar' : 'Añadir fecha' }}
+  </ion-button>
+
+  <ion-card *ngIf="mostrarFormulario" class="form-card">
+    <ion-card-header>
+      <ion-card-title>Proponer nueva fecha</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Tipo de fecha</ion-label>
+        <ion-select [(ngModel)]="tipoFecha" interface="popover">
+          <ion-select-option value="dia">Un solo día</ion-select-option>
+          <ion-select-option value="rango">Rango de fechas</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="tipoFecha === 'dia'">
+        <ion-label>Fecha</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="fechaUnica" min="{{ minDate }}"></ion-datetime>
+      </ion-item>
+
+      <ion-item *ngIf="tipoFecha === 'rango'">
+        <ion-label>Inicio</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="fechaInicio" min="{{ minDate }}"></ion-datetime>
+      </ion-item>
+
+      <ion-item *ngIf="tipoFecha === 'rango'">
+        <ion-label>Fin</ion-label>
+        <ion-datetime presentation="date" [(ngModel)]="fechaFin" [min]="fechaInicio || minDate"></ion-datetime>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" (click)="proponerFecha()" [disabled]="!validarFormulario()">
+        Proponer fecha
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="propuestas.length > 0" lines="none" class="lista-propuestas">
+    <ion-item *ngFor="let p of propuestas" class="propuesta-item" button detail lines="none" [disabled]="votacionEstado !== 'abierta'">
+      <ion-label (click)="yaHaVotado(p) ? desvotar(p.id!) : votar(p.id!)" class="propuesta-label">
+        <h2>{{ obtenerLabel(p) }}</h2>
+        <p>{{ p.votos.length }} voto{{ p.votos.length !== 1 ? 's' : '' }}</p>
+      </ion-label>
+
+      <ion-badge slot="end" [color]="yaHaVotado(p) ? 'success' : 'medium'" class="badge-voto">
+        <ion-icon [name]="yaHaVotado(p) ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="propuestas.length > 0" class="grafico-card">
+    <ion-card-header>
+      <ion-card-title>📊 Votaciones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #graficoCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <p class="estado-votacion">Estado votación: <strong>{{ votacionEstado | titlecase }}</strong></p>
+
+  <ion-button
+    [disabled]="votacionEstado !== 'abierta'"
+    expand="block"
+    color="danger"
+    (click)="cerrarVotacion()"
+  >
+    Cerrar votación
+  </ion-button>
+
+</ion-content>

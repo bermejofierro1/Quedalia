@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Grupos</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div #contentRef class="blur-container">
+     <app-refresher (refresher)="doRefresh($event)"></app-refresher>
+
+
+  <ion-list *ngIf="grupos.length > 0">
+    <ion-item *ngFor="let grupo of grupos" (click)="seleccionarGrupo(grupo.id)" >
+      <ion-avatar slot="start">
+        <img [src]="grupo.foto || 'assets/default-group.png'" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ grupo.nombre }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-text *ngIf="grupos.length === 0">
+    <p>No perteneces a ningún grupo aún.</p>
+  </ion-text>
+
+  </div>
+
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+
+      <ion-fab-button [routerLink]="['/create-join']" style="display: flex; align-items: center; gap: 8px;">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Crear grupo</ion-label>
+      </ion-fab-button>
+
+      <ion-fab-button routerLink="/join-grupo" style="display: flex; align-items: center; gap: 8px;">
+        <ion-icon name="log-in-outline"></ion-icon>
+        <ion-label>Unirse a grupo</ion-label>
+      </ion-fab-button>
+
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+ <!-- Overlay para la carga-->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+    <p class="loading-text">Cargando...</p>
+  </div>

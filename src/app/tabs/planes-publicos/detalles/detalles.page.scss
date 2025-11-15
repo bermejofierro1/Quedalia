@@ -1,0 +1,388 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+  --color-principal: #3b82f6;
+  --color-secundario: #8b5cf6;
+  --color-texto: #ffffff;
+  --fondo-tarjeta: #1e293b;
+}
+
+/* === HEADER === */
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  text-align: center;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-shadow: 0 0 6px rgba(210, 164, 41, 0.6);
+}
+
+ion-button[color="danger"] {
+  font-weight: bold;
+  --background: transparent;
+  --color: var(--ion-text-color);
+  border: 1.5px solid var(--ion-text-color);
+  border-radius: 8px;
+  padding: 0 8px;
+  font-size: 0.85rem;
+  transition: 0.3s ease;
+}
+
+ion-button[color="danger"]:hover {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+}
+
+/* === CONTENT === */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1rem;
+}
+
+/* === CARDS === */
+ion-card {
+  --background: #0b768c;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(210, 164, 41, 0.2);
+  color: var(--ion-text-color);
+  margin-top: 16px;
+}
+
+ion-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+ion-card-content p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+/* === IMAGEN CABECERA === */
+
+.grupo-portada {
+  position: relative;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portada-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+
+    h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+}
+
+.titulo-superpuesto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--ion-text-color);
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  background-color: rgba(8, 80, 98, 0.6);
+  border-radius: 8px;
+  border: 2px solid var(--ion-text-color);
+}
+
+/* === FECHA FINAL === */
+.fecha-final {
+  background-color: var(--ion-text-color);
+  color: #000 !important;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.2);
+}
+
+/* === BLOQUE DE SOLICITUDES === */
+.solicitud-card {
+  margin-bottom: 16px;
+  padding: 8px;
+  background: rgba(11, 118, 140, 0.6);
+  border: 1px solid rgba(210, 164, 41, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+.solicitud-usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.solicitud-estado {
+  margin-bottom: 8px;
+}
+
+.solicitud-votos {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.solicitud-acciones ion-button {
+  margin-right: 6px;
+}
+
+/* === MIEMBROS DEL PLAN === */
+ion-card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-card-header {
+  cursor: pointer;
+}
+
+ion-list {
+  padding: 0;
+}
+
+ion-item {
+  --background: transparent;
+  color: var(--ion-text-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ion-note {
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+/* === DARK MODE === */
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #042b33;
+  }
+
+  ion-card {
+    --background: #085062;
+    box-shadow: 0 4px 12px rgba(210, 164, 41, 0.3);
+  }
+
+  ion-card-content p,
+  ion-card-title {
+    color: var(--ion-text-color);
+  }
+
+  .fecha-final {
+    background-color: #d2a429;
+    color: #042b33;
+  }
+
+  .titulo-superpuesto {
+    background-color: rgba(8, 80, 98, 0.7);
+  }
+
+  ion-button[color="primary"] {
+    --background: var(--ion-text-color);
+    --color: var(--ion-background-color);
+  }
+}
+
+.btn-expulsar {
+  --background: transparent;
+  --color: #e74c3c;
+  --border: 1px solid #e74c3c;
+  --border-radius: 4px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 5px;
+  --padding-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-expulsar:hover {
+  --background: #e74c3c;
+  --color: white;
+}
+
+/* Estilo para el creador */
+.creador-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--ion-text-color);
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1.5px solid rgba(210, 164, 41, 0.5);
+  padding-bottom: 8px;
+}
+
+.creador-info img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--ion-text-color);
+  box-shadow: 0 0 6px rgba(210, 164, 41, 0.7);
+  object-fit: cover;
+}
+
+.fechas-propuestas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.fecha-chip {
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fecha-chip .icono {
+  margin-right: 6px;
+  font-size: 18px;
+  color: #3880ff;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ion-background-color, #063f4e);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 16px;
+  z-index: 9999;
+}
+
+.fixed-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mensaje-unete {
+  color: var(--ion-text-color, #d2a429);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Tarjetas */
+.detalle-info-card {
+  background: var(--fondo-tarjeta);
+  border-radius: 16px;
+  padding: 16px 16px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: var(--color-texto);
+}
+
+/* Info header con icono */
+.info-header {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-principal);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+
+  ion-icon {
+    font-size: 1.5rem;
+    color: var(--color-secundario);
+  }
+
+  label {
+    font-size: 0.85rem;
+    color: #a5b4fc;
+    width: 120px;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 400;
+  }
+}
+
+/* Botón eliminar */
+ion-button[color="medium"] {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+//=======EFECTO RECARGA DE LA PÁGINA=============
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

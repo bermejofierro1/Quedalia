@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Planes Públicos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="planes.length > 0; else sinPlanes">
+    <ion-item
+      *ngFor="let plan of planes"
+      (click)="verDetalle(plan.id)"
+      class="plan-item"
+      [ngStyle]="{
+        'background-image': plan.foto ? 'url(' + plan.foto + ')' : 'none'
+      }"
+      lines="none"
+      button
+    >
+      <ion-label class="plan-label">
+        <h2>{{ plan.titulo }}</h2>
+        <p>{{ plan.descripcion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #sinPlanes>
+    <p>No hay planes públicos disponibles por ahora.</p>
+  </ng-template>
+</ion-content>

@@ -1,0 +1,231 @@
+:host {
+  --color-principal: #3b82f6;
+  --color-secundario: #8b5cf6;
+  --color-texto: #ffffff;
+  --fondo-tarjeta: #1e293b;
+  --bg-page: #0f172a;
+}
+
+//HEADER
+
+ion-header {
+  background-color:#085062;
+  border-bottom: 2px solid var(#d2a429);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.4);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(#d2a429);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-title {
+  color: var(#d2a429);
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 6px rgba(210, 164, 41, 0.8);
+  text-align: center;
+  width: 100%;
+}
+
+//CUERPO
+
+.grupo-page {
+  background-color: var(--bg-page);
+  color: var(--color-texto);
+}
+
+.grupo-portada {
+  position: relative;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .portada-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    h1 {
+      margin: 0;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+}
+
+.grupo-card {
+  background: var(--fondo-tarjeta);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 1rem;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.grupo-info-header {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-principal);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: var(--color-secundario);
+  }
+
+  label {
+    font-size: 0.85rem;
+    color: #a5b4fc;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .codigo {
+    font-family: monospace;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+
+  .copy-icon {
+    margin-left: auto;
+    font-size: 1.2rem;
+    color: #60a5fa;
+    cursor: pointer;
+  }
+
+  .abierta {
+    color: #4ade80;
+  }
+
+  .cerrada {
+    color: #f87171;
+  }
+}
+
+.grupo-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  .boton-gradiente {
+    --background: linear-gradient(135deg, #9333ea, #3b82f6);
+    --color: white;
+    font-weight: bold;
+    border-radius: 14px;
+  }
+
+  .azul {
+    --background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+}
+.grupo-actions.fila {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  ion-button {
+    width: 140px;
+    text-align: center;
+  }
+}
+
+
+.grupo-miembros {
+  margin-top: 2rem;
+
+  .miembros-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e293b;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    ion-icon {
+      font-size: 1.2rem;
+      color: var(--color-secundario);
+    }
+  }
+
+  .miembros-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 10px;
+
+    .miembro-card {
+      background: #1e40af;
+      padding: 8px;
+      border-radius: 12px;
+      text-align: center;
+      color: white;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 6px;
+      }
+      p {
+        font-size: 0.8rem;
+        margin: 0;
+      }
+    }
+  }
+}
+
+//========Efecto refresher===========
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}
+
+

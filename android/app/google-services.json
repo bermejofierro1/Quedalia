@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664500490040",
+    "project_id": "organizador-plan",
+    "storage_bucket": "organizador-plan.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664500490040:android:8a6ff17558e78d9c76bbcd",
+        "android_client_info": {
+          "package_name": "com.miguel.quedadas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFTb1Kw2YP-piinCfKUZ8_Qxw_tGEZGjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

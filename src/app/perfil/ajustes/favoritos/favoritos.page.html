@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/ajustes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>✨ Mis Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="favoritos.length === 0 && !cargando" class="sin-favoritos">
+    No tienes planes guardados como favoritos.
+  </div>
+
+  <ion-list *ngIf="favoritos.length > 0">
+    <ion-card *ngFor="let plan of favoritos" (click)="verDetalle(plan.id)" tabindex="0" role="button" >
+      <ion-card-header>
+        <ion-card-title>{{ plan.titulo }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ plan.descripcion }}</p>
+        <p *ngIf="plan.fechaFinalElegida" class="fecha-final">📅 {{ plan.fechaFinalElegida | date:'mediumDate' }}</p>
+        <ion-button expand="block" (click)="verDetalle(plan.id); $event.stopPropagation()">
+          🔍 Ver detalle
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+</ion-content>

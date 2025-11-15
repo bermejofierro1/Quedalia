@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+   <!-- Overlay de carga -->
+  <div *ngIf="cargando" class="overlay-cargando">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+<div class="avatar-container" (click)="seleccionarImagen()">
+  <img [src]="fotoPerfil" alt="Avatar" />
+  <ion-icon name="camera-outline" class="icono-camara"></ion-icon>
+</div>
+
+  <ion-card>
+   <ion-card-header class="decor-header">
+  <ion-icon name="star-outline"></ion-icon>
+  <ion-card-title>Datos del usuario</ion-card-title>
+  <ion-icon name="star-outline"></ion-icon>
+</ion-card-header>
+
+    <ion-card-content>
+
+      <p><strong>ID:</strong> {{ userId }}</p>
+      <p><strong>Correo:</strong> {{ email }}</p>
+
+      <div class="nombre-container">
+        <strong>Nombre:</strong> {{ nombre }}
+        <ion-button fill="clear" size="small" slot="end" (click)="activarEdicion()">
+          <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div *ngIf="editarNombre" class="editar-nombre">
+        <ion-item>
+          <ion-input [(ngModel)]="nuevoNombre" placeholder="Nuevo nombre"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="guardarCambios()">Guardar</ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!--FILTRO DE FECHAS DE GRUPOS Y PLANES-->
+
+  <ion-segment [(ngModel)]="segmento" class="ion-margin-top">
+  <ion-segment-button value="futuros">Futuros</ion-segment-button>
+  <ion-segment-button value="hoy">En Progreso</ion-segment-button>
+  <ion-segment-button value="pasados">Pasados</ion-segment-button>
+</ion-segment>
+
+<ion-list class="ion-margin-top">
+  <ion-list-header>Grupos</ion-list-header>
+  <ion-card *ngFor="let grupo of gruposFiltrados[segmento]">
+    <ion-card-header>
+      <ion-card-title>{{ grupo.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Fecha: {{ grupo.fechaFinalElegida || 'Sin fecha' }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list-header>Planes</ion-list-header>
+  <ion-card *ngFor="let plan of planesFiltrados[segmento]">
+    <ion-card-header>
+      <ion-card-title>{{ plan.titulo }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+     <ng-container *ngIf="plan.fechaFinalElegida; else fechasPropuestasBlock">
+  Fecha: {{ plan.fechaFinalElegida }}
+</ng-container>
+<ng-template #fechasPropuestasBlock>
+  <div *ngIf="plan.fechasPropuestas?.length; else sinFecha">
+    Fechas:
+    <span *ngFor="let f of plan.fechasPropuestas; let i = index">
+      {{ f }}<span *ngIf="i < plan.fechasPropuestas.length - 1">, </span>
+    </span>
+  </div>
+  <ng-template #sinFecha>
+    Fecha: Sin fecha
+  </ng-template>
+</ng-template>
+
+    </ion-card-content>
+  </ion-card>
+</ion-list>
+
+<!-- === BOTÓN FAVORITOS === -->
+<ion-card button (click)="verFavoritos()">
+  <ion-card-header class="decor-header">
+    <ion-icon name="heart-outline"></ion-icon>
+    <ion-card-title>Mis Favoritos</ion-card-title>
+    <ion-icon name="heart-outline"></ion-icon>
+  </ion-card-header>
+  <ion-card-content>
+    Ver los planes que has guardado como favoritos.
+  </ion-card-content>
+</ion-card>
+
+
+  <ion-button expand="block" color="danger" (click)="cerrarSesion()">
+  Cerrar sesión
+</ion-button>
+
+</ion-content>

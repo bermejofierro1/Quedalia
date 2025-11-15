@@ -1,0 +1,100 @@
+# -------------------------------------------------
+#     ARCHIVOS TEMPORALES GENERALES
+# -------------------------------------------------
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+*.log
+log.txt
+.DS_Store
+Thumbs.db
+
+# -------------------------------------------------
+#     IONIC / ANGULAR / BUILD
+# -------------------------------------------------
+/www
+/platforms
+/plugins
+/.ionic
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/.angular
+/.angular/cache
+.sass-cache/
+.nx
+/.nx
+/.nx/cache
+/connect.lock
+/coverage
+/testem.log
+/libpeerconnection.log
+/typings
+
+# -------------------------------------------------
+#     NODE & DEPENDENCIAS
+# -------------------------------------------------
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# -------------------------------------------------
+#     ENTORNOS Y CONFIG LOCAL
+# -------------------------------------------------
+.env
+.env.local
+.env.*.local
+
+# En Angular/Ionic, si usas environment.prod.ts separado, NO lo ignores.
+# Pero si tienes archivos de entorno locales, ignóralos:
+src/environments/environment.local.ts
+src/environments/environment.dev.local.ts
+
+# -------------------------------------------------
+#     FIREBASE
+# -------------------------------------------------
+
+# Claves privadas (NO deben subir jamás)
+serviceAccountKey.json
+firebase-adminsdk-*.json
+
+# Carpetas de emulador local
+.firebase/
+.firebaserc.local
+
+# Archivos de cache del CLI
+.firestore/
+.storage/
+
+
+
+# -------------------------------------------------
+#     IDEs
+# -------------------------------------------------
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# -------------------------------------------------
+#     SISTEMA
+# -------------------------------------------------
+.DS_Store
+Thumbs.db

@@ -1,0 +1,74 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/* Fondo general tabs */
+ion-tabs {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+/* Barra inferior */
+ion-tab-bar {
+  background-color: var(--ion-background-color);
+  border-top: 2px solid var(--ion-text-color);
+  box-shadow: 0 -2px 8px rgba(210, 164, 41, 0.3);
+}
+
+/* Cada botón del tab */
+ion-tab-button {
+  color: var(--ion-text-color);
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  --background: transparent;
+  --ripple-color: var(--ion-text-color);
+  border-radius: 12px 12px 0 0;
+  margin: 0 6px 0 6px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Iconos de tab */
+ion-tab-button ion-icon {
+  font-size: 24px;
+  color: var(--ion-text-color);
+  transition: color 0.3s ease;
+}
+
+/* Label de tab */
+ion-tab-button ion-label {
+  font-size: 12.5px;
+  color: var(--ion-text-color);
+  transition: color 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Tab activo */
+ion-tab-button.ion-selected, ion-tab-button.selected {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+  box-shadow: 0 -3px 10px rgba(210, 164, 41, 0.6);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Icono y texto activo */
+ion-tab-button.ion-selected ion-icon,
+ion-tab-button.ion-selected ion-label,
+ion-tab-button.selected ion-icon,
+ion-tab-button.selected ion-label {
+  color: var(--ion-background-color);
+}
+
+/* Hover para mejorar UX */
+ion-tab-button:hover:not(.ion-selected):not(.selected) {
+  background-color: rgba(210, 164, 41, 0.15);
+  cursor: pointer;
+  color: var(--ion-text-color);
+}
+

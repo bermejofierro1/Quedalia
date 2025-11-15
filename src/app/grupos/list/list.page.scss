@@ -1,0 +1,187 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/*Header*/
+ion-header {
+  background-color: var(--ion-background-color);
+  box-shadow: 0 2px 8px rgba(210, 164, 41, 0.4);
+  border-bottom: 2px solid var(--ion-text-color);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  /* centra el título */
+  align-items: center;
+  padding: 0 1rem;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-shadow: 0 0 6px rgba(210, 164, 41, 0.8);
+  text-align: center;
+}
+
+/*Contenido*/
+
+ion-content {
+  background-color: var(--ion-background-color);
+  padding: 1rem;
+  color: var(--ion-text-color);
+}
+
+ion-item {
+
+  border-radius: 14px;
+  border: 1.5px solid var(--ion-text-color);
+  margin-bottom: 12px;
+  padding: 12px 10px;
+  color: var(--ion-text-color);
+  box-shadow: none;
+}
+
+
+ion-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(210, 164, 41, 0.25);
+}
+
+
+
+ion-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--ion-text-color);
+  box-shadow: 0 0 8px rgba(210, 164, 41, 0.3);
+  overflow: hidden;
+}
+
+ion-label {
+  padding-left: 1rem;
+}
+
+ion-label h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+  margin: 0;
+}
+
+ion-text p {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  color: #d2a429aa;
+  font-style: italic;
+}
+
+
+ion-button[color="secondary"] {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Responsive: reduce padding en móviles */
+@media (max-width: 480px) {
+  ion-content {
+    padding: 0.75rem;
+  }
+
+  ion-item {
+    padding: 10px 8px;
+    border-radius: 14px;
+  }
+
+  ion-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  ion-label h2 {
+    font-size: 1.1rem;
+  }
+}
+
+ion-fab-list[side="top"] {
+  transform: translateX(-130px);
+  /* Muevo 50px a la izquierda */
+}
+
+ion-fab-list ion-fab-button {
+  min-width: 180px;
+  padding: 0 16px;
+  border-radius: 20px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  gap: 8px;
+
+  /* Forzar colores de fondo y texto */
+  --background: var(--ion-background-color) !important;
+  --background-focused: var(--ion-background-color) !important;
+  background-color: var(--ion-background-color) !important;
+  color: var(--ion-text-color) !important;
+  border: 1.5px solid var(--ion-text-color);
+  box-shadow: 0 3px 8px rgba(210, 164, 41, 0.5);
+}
+
+/* Para el botón interno que Ionic usa */
+ion-fab-list ion-fab-button>button {
+  background-color: var(--ion-background-color) !important;
+  color: var(--ion-text-color) !important;
+  box-shadow: none !important;
+}
+
+/* Iconos y labels dentro */
+ion-fab-list ion-fab-button ion-icon {
+  color: var(--ion-text-color) !important;
+  font-size: 20px;
+}
+
+ion-fab-list ion-fab-button ion-label {
+  color: var(--ion-text-color) !important;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+//=======EFECTO RECARGA DE LA PÁGINA=============
+.blur-container {
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Aplica blur al contenedor cuando está cargando */
+.blur-container.blur-activo {
+  filter: blur(5px);
+  pointer-events: none; 
+}
+
+/* Overlay de carga fullscreen */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  gap: 12px;
+}

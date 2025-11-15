@@ -1,0 +1,108 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/* === HEADER === */
+ion-header {
+  background-color: var(--ion-background-color);
+  border-bottom: 2px solid var(--ion-text-color);
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.3);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  font-weight: bold;
+  font-size: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  text-shadow: 0 0 4px rgba(210, 164, 41, 0.7);
+}
+
+/* === CONTENIDO === */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  padding: 1rem;
+}
+
+/* === CAMPOS DE FORMULARIO === */
+ion-input,
+ion-textarea,
+ion-select,
+ion-datetime {
+  --color: var(--ion-text-color);
+  --background: #0b768c;
+  --border-radius: 12px;
+  --highlight-color-focused: var(--ion-text-color);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin-bottom: 16px;
+  color: var(--ion-text-color);
+}
+
+ion-label {
+  color: var(--ion-text-color);
+  font-weight: 600;
+}
+
+/* === DATETIME === */
+ion-datetime {
+  border-radius: 12px;
+  background: #0b768c;
+  padding: 12px;
+  --color: var(--ion-text-color);
+  margin-top: 12px;
+}
+
+/* === BOTONES === */
+ion-button {
+  --background: var(--ion-text-color);
+  --color: var(--ion-background-color);
+  font-weight: bold;
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 4px 8px rgba(210, 164, 41, 0.4);
+}
+
+ion-button:hover {
+  filter: brightness(1.05);
+}
+
+/* === IMAGEN PREVIEW === */
+.preview-img {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--ion-text-color);
+  margin-top: 16px;
+  box-shadow: 0 0 10px rgba(210, 164, 41, 0.4);
+}
+
+/* === TEXTO DE ERROR === */
+ion-text[color="danger"] {
+  text-align: center;
+  font-weight: 600;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* === UBICACIÓN SELECCIONADA === */
+ion-item[direccion] {
+  background: transparent;
+  --inner-padding-end: 0;
+}
+
+ion-text {
+  color: var(--ion-text-color);
+  font-weight: 500;
+  font-size: 14px;
+}

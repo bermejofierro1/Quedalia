@@ -1,0 +1,102 @@
+:host {
+  --ion-background-color: #085062;
+  --ion-text-color: #d2a429;
+}
+
+/* == HEADER == */
+ion-header {
+  background-color: var(--ion-background-color);
+  box-shadow: 0 2px 8px rgba(210, 164, 41, 0.4);
+  border-bottom: 2px solid var(--ion-text-color);
+}
+
+ion-toolbar {
+  --background: transparent;
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-title {
+  color: var(--ion-text-color);
+  text-shadow: 0 0 6px rgba(210, 164, 41, 0.8);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* == BOTÓN DE VOLVER EN HEADER == */
+ion-header ion-button {
+  --background: transparent;
+  --color: var(--ion-text-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1.5px solid var(--ion-text-color);
+  box-shadow: 0 2px 5px rgba(210, 164, 41, 0.3);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+ion-header ion-button:hover {
+  background-color: var(--ion-text-color);
+  color: var(--ion-background-color);
+}
+
+/* == CONTENIDO GENERAL == */
+ion-content {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+ion-item {
+  --background: #0b768c;
+  --color: var(--ion-text-color);
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 2px 6px rgba(210, 164, 41, 0.25);
+}
+
+ion-label {
+  color: var(--ion-text-color);
+  font-weight: 500;
+}
+
+ion-input {
+  --color: var(--ion-text-color);
+}
+
+ion-note {
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+ion-button[type="submit"] {
+  --background: var(--ion-text-color);
+  --color: var(--ion-background-color);
+  font-weight: 700;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 6px rgba(210, 164, 41, 0.4);
+}
+
+ion-button[type="submit"]:disabled {
+  opacity: 0.5;
+  --background: var(--ion-text-color);
+  --color: var(--ion-background-color);
+}
+
+/* ===== MENSAJES ===== */
+ion-text[color="danger"],
+ion-text[color="success"] {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+  font-weight: 500;
+}
