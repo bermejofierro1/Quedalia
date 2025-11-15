@@ -9,6 +9,9 @@ La app para organizar quedadas, planes colaborativos y gastos entre amigos.
 Quedalia es una aplicación móvil diseñada para simplificar la organización de planes en grupo, votaciones, chat en tiempo real y gestión de gastos compartidos (Tricoins).
 Construida con Ionic + Angular y potenciada por Firebase, ofrece sincronización en tiempo real, almacenamiento seguro y una experiencia moderna y colaborativa.
 
+## DESCARGA DE APK
+ Enlace ---> https://drive.google.com/file/d/14w48LZvkNqVLbT_ZEvyxN9ywpkfcXi_W/view?usp=drive_link
+
 ## ✨ Características Principales
 ### 👥 1. Grupos
 
